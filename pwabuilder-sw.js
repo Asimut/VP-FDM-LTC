@@ -135,7 +135,7 @@ self.addEventListener('install', function(event) {
       pageLink+'assets/custom/ingrezza-valbenazine-logo-n.svg',
       pageLink+'assets/custom/logo-modal.png',
       pageLink+'assets/custom/open-book.svg',
-      ...asset.map(i => pageLink+'assets/' + i),
+      ...assets.map(i => pageLink+'assets/' + i),
       pageLink+'pwabuilder-sw.js',
       pageLink+'manifest.json',
       pageLink+'152.png',
