@@ -17,7 +17,7 @@
           // It won't be able to control pages unless it's located at the same level or higher than them.
           // *Don't* register service worker file in, e.g., a scripts/ sub-directory!
           // See https://github.com/slightlyoff/ServiceWorker/issues/468
-          navigator.serviceWorker.register('pwabuilder-sw.js').then(function(reg) {
+          navigator.serviceWorker.register('oc-fdm-sw.js').then(function(reg) {
             // updatefound is fired if service-worker.js changes.
             reg.onupdatefound = function() {
               // The updatefound event implies that reg.installing is set; see
@@ -64,26 +64,36 @@
 
           function checkRegistration() {
             navigator.serviceWorker.getRegistrations().then(registrations => {
-              console.log(registrations[0]);
-              if(registrations[0].installing){
-                console.log('Still Installing!')
 
-                setTimeout(checkRegistration, 500);
-              }
-              if(registrations[0].active){
-                console.log('ServiceWorker installed!');
+              registrations.forEach(function(element, index) {
+                  console.log(element);
+                  var registerItem = element;
 
-                var Loader = document.getElementById("loader");
-                    Loader.style.display = 'none';
+                  if(registerItem.installing){
+                    console.log('Still Installing!')
 
-                if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
-                  console.log('Приложение уже установлено')
-                } else {
-                  console.log('Приложение еще не установлено');
-                  alert('App is ready to download!');
-                }  
+                    setTimeout(checkRegistration, 500);
+                  }
+                  if(registerItem.active){
+                    console.log(registerItem.active.scriptURL);
 
-              }
+                    if(registerItem.active.scriptURL == "https://asimut.github.io/VP-FDM-LTC/oc-fdm-sw.js"){
+                      console.log('ServiceWorker VP-OC installed!');
+
+                      var Loader = document.getElementById("loader");
+                          Loader.style.display = 'none';
+
+                      if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+                        console.log('The app is already installed');
+                      } else {
+                        console.log('The app is not installed yet');
+                        alert('App is ready to download!');
+                      }  
+                    }
+
+                  }
+              });
+
             });
           }
 

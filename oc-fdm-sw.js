@@ -136,7 +136,7 @@ self.addEventListener('install', function(event) {
       pageLink+'assets/custom/logo-modal.png',
       pageLink+'assets/custom/open-book.svg',
       ...assets.map(i => pageLink+'assets/' + i),
-      pageLink+'pwabuilder-sw.js',
+      pageLink+'oc-fdm-sw.js',
       pageLink+'manifest.json',
       pageLink+'152.png',
       pageLink+'144.png',
